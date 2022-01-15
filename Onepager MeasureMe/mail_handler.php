@@ -9,7 +9,6 @@ if(isset($_POST['submit'])){
     $message = $name . " wrote the following:" . "\n\n" . $_POST['message'];
 
     $headers = "From:" . $from;
-    $headers2 = "From:" . $to;
     mail($to,$subject,$phone_number,$company,$message,$headers);
 
     }
