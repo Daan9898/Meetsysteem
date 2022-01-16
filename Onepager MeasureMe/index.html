@@ -410,7 +410,7 @@
                         </div>
                     </div>
 
-                    <form action="mail_handler.php" method="post">
+                    <form action="POST" method="post" data-netlify="true">
                         <div class="contact__inputs">
                             <div class="contact__content">
                                 <input type="text" placeholder=" " class="contact__input" name="name">
@@ -436,6 +436,10 @@
                                 <textarea name="message" placeholder=" " class="contact__input"></textarea>                              
                                 <label for="" class="contact__label">Message</label>
                             </div>
+                        </div>
+                        
+                        <div class="field">
+                            <div data-netlify-recaptcha="true"></div>
                         </div>
 
                         <button class="button button--flex" type="submit" name="submit" value="Submit">
