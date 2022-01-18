@@ -5,6 +5,8 @@ Onze primaire klant is de eigenaar van een kleding webshop.
 
 Onze secundaire klant is de websiteontwikkelaar. Deze klant maakt en verkoop websites met onze software er in. 
 
+onze eindgebruiker is de klant die kleding koopt. De feedback die we hier van krijgen is zeer belangrijk
+
 ### Wat 
 MeasureMe is een software die je kleding maat kan meten door het maken van 1 foto. 
 
