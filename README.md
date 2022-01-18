@@ -39,12 +39,13 @@ Co2 uitstoot	55.600 kg
 De software wordt met javascript en python gemaakt. Javascript wordt gebruikt voor het nemen van de foto in een website. Python wordt gebruikt voor machine learning script en het omzetten van vertices naar centimeters. MySql wordt gebruikt voor het opslaan van data en het lezen van data. 
 
 ### Wanneer 
-
+Nog niet bekend
 
 
 ### Gebruikers perspectief 
 Button:
 Dit is de knop op de website waar mensen het systeem mee activeren. Er wordt een nieuw tabblad geopend.
+
 
 
 Frame:
