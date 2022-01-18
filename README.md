@@ -1,7 +1,5 @@
 # Measure software
 
-Read me 
-
 
 Wie 
 Onze primaire klant is de eigenaar van een kleding webshop. 
