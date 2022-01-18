@@ -46,7 +46,8 @@ Nog niet bekend
 Button:
 Dit is de knop op de website waar mensen het systeem mee activeren. Er wordt een nieuw tabblad geopend.
 
-
+Voorbeeld foto: 
+![alt text](https://github.com/Daan9898/Meetsysteem/blob/main/Img/MeasureMe%20button.PNG "Logo Title Text 1")
 
 Frame:
 In het nieuwe tabblad moet de persoon op camera toestaan klikken. Als de persoon dit niet doet kan de camera ook niet aan.
@@ -56,9 +57,16 @@ Wanneer er op de knop wordt gedrukt gaat het frame open met daarin aangegeven de
 Het maken van de foto:
 Wanneer de gebruiker op Click Photo klikt wordt er van 10 seconde afgeteld in de frame. De gebruiker heeft nu tijd om goed te staan in de frame. Als die bij 0 komt maakt het programma een foto en stuurt die door naar de server. 
 
-Waar zitten de borst, taille en heup in percentages van de persoon
-uit het voorbeeld hier onder is te zien dat je de mens in 8 delen kan opdelen. 100% geeft de hoogte aan van de persoon. 2.  Geeft de borst aan 75% zou de borst zitten. 3 geeft de taille aan. Deze zou op 62,5% zitten. Op plek 4 zou ongeveer de heup zitten op 50% van de lichaam 
 
+Voorbeeld foto: 
+![alt text](https://github.com/Daan9898/Meetsysteem/blob/main/Img/Take%20picture%20button.PNG "Logo Title Text 1")
+
+
+Waar zitten de borst, taille en heup in percentages van de persoon
+uit het voorbeeld hier onder is te zien dat je de mens in 8 delen kan opdelen. 100% geeft de hoogte aan van de persoon. 2.  Geeft de borst aan 75% zou de borst zitten. 3 geeft de taille aan. Deze zou op 62,5% zitten. Op plek 4 zou ongeveer de heup zitten op 50% van de lichaam.
+
+Voorbeeld foto: 
+![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
 
 
 
