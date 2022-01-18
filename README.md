@@ -66,7 +66,7 @@ Waar zitten de borst, taille en heup in percentages van de persoon
 uit het voorbeeld hier onder is te zien dat je de mens in 8 delen kan opdelen. 100% geeft de hoogte aan van de persoon. 2.  Geeft de borst aan 75% zou de borst zitten. 3 geeft de taille aan. Deze zou op 62,5% zitten. Op plek 4 zou ongeveer de heup zitten op 50% van de lichaam.
 
 Voorbeeld foto: 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+![alt text](https://github.com/Daan9898/Meetsysteem/blob/main/Img/Fibbonaci%20man%20indeling.PNG "Logo Title Text 1")
 
 
 
