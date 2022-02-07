@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <!--=============== FAVICON ===============-->
+        <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+        <!--=============== REMIX ICONS ===============-->
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+        <!--=============== CSS ===============-->
+        <link rel="stylesheet" href="assets/css/styles.css">
+
+        <title>Take Picture</title>
+
+</head>
+<style>
+    #container {
+	margin: 100px auto;
+	width: 720px;
+	height: 480px;
+	border: 2px #ffff solid;
+    }
+
+    .person{
+    position: absolute;
+    pointer-events: none;
+    z-index: 100;
+    }
+
+    #videoElement {
+    width: 720px;
+    height: 480px;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    z-index: 101;
+    }
+
+    .time{
+    float:right;
+    width:220px;
+    height:40px;
+    margin: 10px auto;
+    }
+
+    .button5 {
+    background-color: white;
+    color: black;
+    border: 2px solid #555555;
+    padding: 10px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 2px;
+    cursor: pointer;
+    }
+
+    #dataurl-container {
+        display: none;
+        margin: 10px;
+    }
+
+    #dataurl-header {
+        text-align: center;
+        font-size: 15px;
+    }
+    
+    #dataurl {
+        display: block;
+        height: 100px;
+        width: 320px;
+        margin: 10px auto;
+        resize: none;
+        outline: none;
+        border: 1px solid #111111;
+        padding: 5px;
+        font-size: 13px;
+        box-sizing: border-box;
+    }
+
+
+
+
+</style> 
+<body>
+    <!--==================== HEADER ====================-->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#" class="nav__logo">
+                <i class="ri-leaf-line nav__logo-icon"></i> MeasureUp
+            </a>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="index.html #home" class="nav__link active-link">Home</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="index.html #about" class="nav__link">About</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="index.html #faqs" class="nav__link">FAQs</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="index.html #contact" class="nav__link">Contact us</a>
+                    </li>
+                    <li class="nav__item">
+                        <a  href="picture.html" target="_blank" class="nav__link" >Test It</a>
+                </ul>
+
+                <div class="nav__close" id="nav-close">
+                    <i class="ri-close-line"></i>
+                </div>
+            </div>
+
+            <div class="nav__btns">
+                <!-- Theme change button -->
+                <i class="ri-moon-line change-theme" id="theme-button"></i>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class="ri-menu-line"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+        <div id="container" >
+            <picture>
+                <img src="person.png" alt="person" class="person">
+                
+            </picture>
+            
+            <video autoplay="true" id="videoElement"></video>
+
+            <div>
+                <button  id="click-photo" type=button value="Take Snapshot" class="button5" onclick="myClick();">Take Picture</button>
+                
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <h1 class="time">Seconds : <span id="time1">10</span></h1>
+                <input type="file" id="myFile" name="filename" >
+                <input type="submit">
+                <img id="imgPreview" alt="Preview" class="person">
+
+            </div>
+            <canvas id="canvas" width="720" height="480"></canvas>
+            <div id="dataurl-container">
+            <div id="dataurl-header">Image Data URL</div>
+            <textarea id="dataurl" readonly=""></textarea>
+            
+        
+            </div>
+
+
+        </div>
+
+
+        <!--=============== JAVA SCRIPT ===============-->
+        <script>
+            let canvas = document.querySelector("#canvas");
+            let dataurl = document.querySelector("#dataurl");
+            let dataurl_container = document.querySelector("#dataurl-container");
+            
+
+
+            // open camera // 
+            var video = document.querySelector("#videoElement");
+            
+            if (navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                video.srcObject = stream;
+                })
+                .catch(function (err0r) {
+                console.log("Something went wrong!");
+                });
+            }
+       
+            // Telt van 10 seconde af naar 0 //
+            $("#click-photo").click(function() {
+            var tenSeconds = 10,
+                display = document.querySelector('#time1');
+            startTimer(tenSeconds, display);
+            });
+
+            function startTimer(duration, display) {
+            var timer = duration,
+                 seconds;
+                
+            var intervalFn = function() {
+                seconds = parseInt(timer % 60, 10);
+
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = seconds;
+
+                if (--timer < 0) {
+                timer = 0;
+                }
+            };
+    
+            setInterval(intervalFn, 1000);
+            
+            intervalFn();
+            }
+
+            // maakt een foto van de persoon// setTimeout(... , 10000);
+            
+            let click_button = document.querySelector("#click-photo");
+
+                click_button.addEventListener('click', function test () {
+                    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+                        let image_data_url = canvas.toDataURL('image/jpeg');
+
+                dataurl.value = image_data_url;
+                dataurl_container.style.display = 'block';
+                
+                // Speelt audio af // 
+                var audio = new Audio('https://www.soundjay.com/mechanical/sounds/camera-shutter-click-03.mp3');
+                audio.play();
+                
+               
+                
+            });
+            
+            // saves photo to database //
+
+            
+
+
+             
+        </script>
+
+
+    </body>
+</html>
