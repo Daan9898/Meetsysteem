@@ -240,9 +240,13 @@
             canvas.style.display = 'none';
             click_reaload.style.display = 'none';
             submit.style.display = 'none';
+            
+            
+                // your code here
+            
 
-
-                click_button.addEventListener('click', function test() {
+                click_button.addEventListener("click", () => {
+                    setTimeout(() => {
                     let stream = null;
                     canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
                         let image_data_url = canvas.toDataURL('image/jpeg');
@@ -264,6 +268,9 @@
                 // plays audio  // 
                 var audio = new Audio('https://www.soundjay.com/mechanical/sounds/camera-shutter-click-03.mp3');
                 audio.play();
+
+            }, 10 * 1000);
+            
 
             });
             
