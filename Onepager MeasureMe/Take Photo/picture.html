@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <!--=============== FAVICON ===============-->
+        <link rel="shortcut icon" href="../assets/img/favicon.png" type="image/x-icon">
+
+        <!--=============== REMIX ICONS ===============-->
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+        <!--=============== CSS ===============-->
+        <link rel="stylesheet" href="../assets\css\styles.css">
+        <link rel="stylesheet" href="../assets\css\main.min.css">
+
+
+        <title>Take Picture</title>
+
+</head>
+<style>
+    #container {
+	margin: 100px auto;
+	width: 720px;
+	height: 480px;
+	border: 2px #ffff solid;
+    }
+
+    .person{
+    position: absolute;
+    pointer-events: none;
+    z-index: 100;
+    }
+
+    #videoElement {
+    width: 720px;
+    height: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    z-index: 101;
+    }
+
+    .canvas{
+    width: 660px;
+    height: 480px;
+    margin-left: 35px;
+    display: block;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    z-index: 99;
+    }
+
+    .img {  
+    position: absolute;
+    pointer-events: none;
+    width:720px; 
+    height:480px; 
+    z-index: 101; 
+    } 
+
+    .time{
+    float:right;
+    width:220px;
+    height:40px;
+    margin: 10px auto;
+    }
+
+    .btn {
+    background-color: DodgerBlue;
+    border: none; 
+    color: white;
+    padding: 10px 32px; 
+    font-size: 16px; 
+    cursor: pointer; 
+    border-radius: 50px;  
+    margin: 10px 2px;
+    }
+
+    /* Darker background on mouse-over */
+    .btn:hover {
+    background-color: RoyalBlue;
+    }
+
+    #dataurl-container {
+        display: none;
+        margin: 10px;
+    }
+
+    #dataurl-header {
+        text-align: center;
+        font-size: 15px;
+    }
+    
+    #dataurl {
+        display: block;
+        height: 100px;
+        width: 320px;
+        margin: 10px auto;
+        resize: none;
+        outline: none;
+        border: 1px solid #111111;
+        padding: 5px;
+        font-size: 13px;
+        box-sizing: border-box;
+    }
+
+
+
+
+
+
+
+</style> 
+<body>
+
+
+
+
+    <!--==================== HEADER ====================-->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#" class="nav__logo">
+                <i class="ri-leaf-line nav__logo-icon"></i> MeasureUp
+            </a>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="index.html #home" class="nav__link active-link">Home</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="index.html #about" class="nav__link">About</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="index.html #faqs" class="nav__link">FAQs</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="index.html #contact" class="nav__link">Contact us</a>
+                    </li>
+                    <li class="nav__item">
+                        <a  href="picture.html" target="_blank" class="nav__link" >Test It</a>
+                </ul>
+
+                <div class="nav__close" id="nav-close">
+                    <i class="ri-close-line"></i>
+                </div>
+            </div>
+
+            <div class="nav__btns">
+                <!-- Theme change button -->
+                <i class="ri-moon-line change-theme" id="theme-button"></i>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class="ri-menu-line"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+        <div id="container" >
+            
+            <picture>
+                <img src="person.png" alt="person" class="person" id="person">
+                <img id="preview" class="img" id="img"  />
+                <video autoplay="true" id="videoElement"></video>
+                <canvas id="canvas" class="canvas" width="1280" height="720"></canvas>
+            </picture>
+            
+            
+
+            <div>
+                <button id="click-photo" value="Take Snapshot" class="btn" class="btnLaunch1" ><i class="fa fa-camera"></i> Maak Foto</button>
+                <button id="click-reload" class="btn" onClick="window.location.reload();"><i class="fa fa-recycle"></i> Retry</button>
+                
+
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <h1 id="countdown" class="time">Seconds : <span id="time">07</h1>
+                
+
+                <input type='file' name='image' id="file" hidden/>
+                <label for="file" class="btn"><i class="fa fa-upload"></i> Choose file</label>
+                
+                <button type="submit" id="submit" class="btn"><i class="fa fa-paper-plane"></i> Verstuur</button>
+                
+                
+                
+                <!-- <button class="btnLaunch1">Info with content</button>
+                <button class="btnLaunch2">Success with content</button>
+                <button class="btnLaunch3">Danger with sound</button>
+                <button class="btnLaunch4">Warning</button> -->
+
+            </div>
+            
+            <div id="dataurl-container">
+            <div id="dataurl-header">Image Data URL</div>
+            <textarea id="dataurl" readonly=""></textarea>
+            
+        
+            </div>
+
+
+        </div>
+
+        <script src="../assets\js\notify.js"></script>
+
+        <!--=============== JAVA SCRIPT ===============-->
+        <script>
+            
+            let canvas = document.querySelector("#canvas");
+            let dataurl = document.querySelector("#dataurl");
+            let dataurl_container = document.querySelector("#dataurl-container");
+
+
+
+            // open camera // 
+            var video = document.querySelector("#videoElement");
+            
+            if (navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                video.srcObject = stream;
+                })
+                .catch(function (err0r) {
+                console.log("Something went wrong!");
+                });
+            }
+       
+            // Telt van 7 seconde af naar 0 //
+            $("#click-photo").click (function () {
+            var tenSeconds = 7; 
+                display = document.querySelector('#time');
+            startTimer(tenSeconds, display);
+            });
+
+            function startTimer(duration, display) {
+            var timer = duration, seconds;
+            
+            var intervalFn = function test () {
+                seconds = parseInt(timer % 60, 10);
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                display.textContent = seconds;
+                
+                if (--timer < 0) {
+                    timer = 0;
+                }
+
+            };
+
+
+            
+
+            setInterval(intervalFn, 1000);
+            intervalFn(); 
+            }
+           
+            let timeoutID;
+            function delayedMessage() {
+            timeoutID = setTimeout(test, 7000);
+            }
+
+            // takes picture// setTimeout(... , 10000);
+            
+
+
+
+
+
+
+
+            let click_button = document.querySelector("#click-photo");
+            let click_reaload = document.querySelector("#click-reload");
+            let submit = document.querySelector("#submit");
+
+            
+            
+
+            // don't show canvas, button before taking picture
+            canvas.style.display = 'none';
+            click_reaload.style.display = 'none';
+
+                click_button.addEventListener("click", () => {
+                    setTimeout(() => {
+                    let stream = null;
+                    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+                        let image_data_url = canvas.toDataURL('image/jpeg');
+
+                dataurl.value = image_data_url;
+                dataurl_container.style.display = 'block';
+
+                // don't show video and person after taking picture
+                videoElement.style.display = 'none';
+                person.style.display = 'none';
+
+                // show canvas after taking picture
+                canvas.style.display = 'inline';
+                click_reaload.style.display = 'inline';
+                click_button.style.display = 'none';
+                submit1.style.display = 'none';
+
+                
+                // plays audio  // 
+                var audio = new Audio('https://www.soundjay.com/mechanical/sounds/camera-shutter-click-03.mp3');
+                audio.play();
+
+                }, 7 * 1000);
+
+
+                // timout notify 7 sec //
+                setTimeout(() => {
+                        notify.render({
+                            style: "success",
+                                head: "Success!",
+                            content: "De foto is genomen"
+                        });
+                    }, 7 * 1000);
+        
+                });
+            
+            // Preview image // 
+            var file = document.getElementById('file'); 
+            var preview = document.getElementById('preview'); 
+            file.addEventListener('change', function() {   
+            preview.src = URL.createObjectURL(this.files[0]); 
+            }, false); 
+
+
+
+
+
+            // send animation
+
+
+
+
+            // saves photo to database //
+
+     
+    // notify //        
+
+	// initialization
+	// const notify = new Notify({
+	// 	corner: "top_right", // Select the angle of appearance of notifications, e.g. "top_left" or "bottom_right" (default: top_right)
+	// 	delay: 5000, // Set the delay in milliseconds (default: 5000)
+	// 	maxElem: 12 // Set the maximum number of notifications on the screen (default: 10)
+	// });
+	
+	const notify = new Notify();
+	// adding handlers to buttons and notification rendering
+
+    // info melding blauw // 
+    const noty_1 = document.querySelector("click-photo");
+    noty_1.addEventListener("click", () => {
+        notify.render({
+            head: "Info",
+            content: "A simple info alert—check it out!"
+        });
+    });
+
+    // Great Success button 
+    const noty_2 = document.querySelector(".btnLaunch2");
+    noty_2.addEventListener("click", () => {
+        notify.render({
+            style: "success",
+            head: "Success",
+            content: "A simple success alert—check it out!"
+        });
+    });
+
+    // Een rode foutmelding //
+    const noty_3 = document.querySelector(".btnLaunch3");
+    noty_3.addEventListener("click", () => {
+        notify.render({
+            style: "danger",
+            head: "Danger",
+            content: "A simple warning alert—check it out!",
+            sound: true
+        });
+    });
+
+    // een warning massage Geel // 
+    const noty_4 = document.querySelector(".btnLaunch4");
+    noty_4.addEventListener("click", () => {
+        notify.render({style: "warning"});
+    });
+    
+    
+    
+    // setTimeout(() => {
+    // 		document.querySelector('#notifyContainer').click();
+    // 	}, 100);
+    // 	document.querySelector('#notifyContainer').addEventListener('click', function() {
+    //   setTimeout(() => {
+    // 		notify.render({
+    // 			style: "asdavsdf",
+    // 			    head: "Hello!",
+    // 			content: "A simple success alert—check it out!"
+    // 		});
+    // 	}, 1000);
+    // });
+        
+
+        
+    
+             
+        </script>
+
+
+    </body>
+</html>
