@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+      <!--=============== FAVICON ===============-->
+      <link rel="shortcut icon" href="../assets/img/favicon.png" type="image/x-icon">
+      <!--=============== REMIX ICONS ===============-->
+      <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <!--=============== CSS ===============-->
+      <link rel="stylesheet" href="../assets\css\styles.css">
+      <link rel="stylesheet" href="../assets\css\main.min.css">
+      <title>Take Picture</title>
+   
+   <style>
+      #container {
+      margin: 100px auto;
+      width: 720px;
+      height: 480px;
+      border: 2px #ffff solid;
+      }
+      .person{
+      position: absolute;
+      pointer-events: none;
+      z-index: 100;
+      }
+      #videoElement {
+      width: 720px;
+      height: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      -webkit-transform: scaleX(-1);
+      transform: scaleX(-1);
+      z-index: 101;
+      }
+      .canvas{
+      width: 660px;
+      height: 480px;
+      margin-left: 35px;
+      display: block;
+      -webkit-transform: scaleX(-1);
+      transform: scaleX(-1);
+      z-index: 99;
+      }
+      .img {  
+      position: absolute;
+      pointer-events: none;
+      width:720px; 
+      height:480px; 
+      z-index: 101; 
+      } 
+      .time{
+      float:right;
+      width:220px;
+      height:40px;
+      margin: 10px auto;
+      }
+      .btn {
+      background-color: DodgerBlue;
+      border: none; 
+      color: white;
+      padding: 10px 32px; 
+      font-size: 16px; 
+      cursor: pointer; 
+      border-radius: 50px;  
+      margin: 10px 2px;
+      }
+      /* Darker background on mouse-over */
+      .btn:hover {
+      background-color: RoyalBlue;
+      }
+      #dataurl-container {
+      display: none;
+      margin: 10px;
+      }
+      #dataurl-header {
+      text-align: center;
+      font-size: 15px;
+      }
+      #dataurl {
+      display: block;
+      height: 100px;
+      width: 320px;
+      margin: 10px auto;
+      resize: none;
+      outline: none;
+      border: 1px solid #111111;
+      padding: 5px;
+      font-size: 13px;
+      box-sizing: border-box;
+      }
+   </style>
+   </head>
+   <body>
+      <!--==================== HEADER ====================-->
+      <header class="header" id="header">
+         <nav class="nav container">
+            <a href="#" class="nav__logo">
+            <i class="ri-leaf-line nav__logo-icon"></i> MeasureUp
+            </a>
+            <div class="nav__menu" id="nav-menu">
+               <ul class="nav__list">
+                  <li class="nav__item">
+                     <a href="../index.html" class="nav__link active-link">Home</a>
+                  </li>
+                  <li class="nav__item">
+                     <a href="../index.html #about" class="nav__link">About</a>
+                  </li>
+                  <li class="nav__item">
+                     <a href="../index.html #faqs" class="nav__link">FAQs</a>
+                  </li>
+                  <li class="nav__item">
+                     <a href="../index.html #contact" class="nav__link">Contact us</a>
+                  </li>
+                  <li class="nav__item">
+                     <a  href="picture.html" target="_blank" class="nav__link" >Test It</a>
+               </ul>
+               <div class="nav__close" id="nav-close">
+                  <i class="ri-close-line"></i>
+               </div>
+            </div>
+            <div class="nav__btns">
+               <!-- Theme change button -->
+               <i class="ri-moon-line change-theme" id="theme-button"></i>
+               <div class="nav__toggle" id="nav-toggle">
+                  <i class="ri-menu-line"></i>
+               </div>
+            </div>
+         </nav>
+      </header>
+      <div id="container" >
+         <div id="result"></div>
+         <picture>
+            <img src="person.png" alt="person" class="person" id="person">
+            <img id="preview" class="img"   />
+            <video autoplay="true" id="videoElement"></video>
+            <canvas id="canvas" class="canvas" width="1280" height="720"></canvas>
+         </picture>
+         <div>
+            <button id="click-photo" value="Take Snapshot" class="btn"  ><i class="fa fa-camera"></i> Maak Foto</button>
+            <button id="click-reload" class="btn" onClick="window.location.reload();"><i class="fa fa-recycle"></i> Retry</button>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <h1 id="countdown" class="time">Seconds : <span id="time">07</span></h1>
+            <input type='file'  name='image' id="file" hidden/>
+            <label for="file" class="btn"><i class="fa fa-upload"></i> Choose file</label>
+            <button  id="submit" class="btn"><i class="fa fa-paper-plane"></i> Verstuur</button>
+            <button  id="submit2" class="btn" style="display:none"><i class="fa fa-paper-plane"></i> Verstuur</button>
+         </div>
+      </div>
+      <script src="../assets/js/notify.js"></script>
+      <!--=============== JAVA SCRIPT ===============-->
+      <script src="main.js">     
+         const notify = new Notify();
+         // adding handlers to buttons and notification rendering
+         // info melding blauw // 
+         const noty_1 = document.querySelector("click-photo");
+         noty_1.addEventListener("click", () => {
+             notify.render({
+                 head: "Info",
+                 content: "A simple info alert—check it out!"
+             });
+         });
+         
+         // Great Success button 
+         const noty_2 = document.querySelector(".btnLaunch2");
+         noty_2.addEventListener("click", () => {
+             notify.render({
+                 style: "success",
+                 head: "Success",
+                 content: "A simple success alert—check it out!"
+             });
+         });
+         
+         // Een rode foutmelding //
+         const noty_3 = document.querySelector(".btnLaunch3");
+         noty_3.addEventListener("click", () => {
+             notify.render({
+                 style: "danger",
+                 head: "Danger",
+                 content: "A simple warning alert—check it out!",
+                 sound: true
+             });
+         });
+         
+         // een warning massage Geel // 
+         const noty_4 = document.querySelector(".btnLaunch4");
+         noty_4.addEventListener("click", () => {
+             notify.render({style: "warning"});
+         });
+         
+      </script>
+   </body>
+</html>
